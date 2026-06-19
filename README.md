@@ -62,7 +62,7 @@ Due to modern browser security restrictions, running the `index.html` file direc
 
 ```bash
 
-git clone [https://github.com/daddesa/cses-tracker.git](https://github.com/daddesa/cses-tracker.git)
+git clone https://github.com/daddesa/cses-tracker.git
 
 cd cses-tracker
 
