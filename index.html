@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSES Real-Time Advanced Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/satellite.js/4.0.0/satellite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div id="app-container">
+        <div id="dashboard">
+            <div id="brand">
+                <h1>CSES Control Room</h1>
+                <p class="subtitle">v1.0</p>
+                
+                <div class="control-panel">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="chk-saa" checked onchange="toggleLayer('saa')">
+                        SAA Magnetic Anomaly
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="chk-pred" checked onchange="toggleLayer('pred')">
+                        Future Trajectory Prediction
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="chk-footprint" checked onchange="toggleLayer('footprint')">
+                        Footprint (Coverage Area)
+                    </label>
+                </div>
+            </div>
+            
+            <div class="satellite-card" id="cses01-card">
+                <h2>CSES-01</h2>
+                <div class="data-row"><span>Lat/Lon:</span> <span id="cses01-coords" class="geo-data">Connecting...</span></div>
+                <div class="data-row"><span>Altitude:</span> <span><span id="cses01-alt">-</span> km</span></div>
+                <div class="data-row"><span>Velocity:</span> <span><span id="cses01-vel">-</span> km/h</span></div>
+                <div class="data-row magnetic-data"><span>Mag. Field (Dipole):</span> <span><span id="cses01-mag">-</span> nT</span></div>
+            </div>
+
+            <div class="satellite-card" id="cses02-card">
+                <h2>CSES-02</h2>
+                <div class="data-row"><span>Lat/Lon:</span> <span id="cses02-coords" class="geo-data">Connecting...</span></div>
+                <div class="data-row"><span>Altitude:</span> <span><span id="cses02-alt">-</span> km</span></div>
+                <div class="data-row"><span>Velocity:</span> <span><span id="cses02-vel">-</span> km/h</span></div>
+                <div class="data-row magnetic-data"><span>Mag. Field (Dipole):</span> <span><span id="cses02-mag">-</span> nT</span></div>
+            </div>
+
+            <div id="analytics-container">
+                <div class="tab-menu">
+                    <button class="tab-btn active" onclick="switchTab(event, 'tab-altitudine')">Altitude Chart</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'tab-distanza')">Relative Distance</button>
+                </div>
+
+                <div class="tab-content active" id="tab-altitudine">
+                    <div class="chart-wrapper">
+                        <canvas id="chartAltitudine"></canvas>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="tab-distanza">
+                    <div class="distance-stat">
+                        <span>Linear Distance:</span>
+                        <strong id="live-distance">- km</strong>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="chartDistanza"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
