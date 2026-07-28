@@ -12,7 +12,7 @@ This repository contains a real-time, client-side web application designed to tr
 
 
 
-Built as an independent project, the application calculates satellite positions, altitudes, and kinematic data dynamically using SGP4/SDP4 propagation models, relying on live Two-Line Element (TLE) sets fetched directly from public CelesTrak APIs. The goal is to provide a lightweight, accessible tool to visualize the satellite's journey across the globe and its interaction with the near-Earth environment.
+Built as an independent project, the application calculates satellite positions, altitudes, and kinematic data dynamically using SGP4/SDP4 propagation models, relying on live Two-Line Element (TLE) sets fetched directly from public CelesTrak APIs. The goal is to provide a lightweight, accessible tool to visualize the satellite's journey across the globe.
 
 
 
@@ -20,11 +20,7 @@ Built as an independent project, the application calculates satellite positions,
 
 **CSES** is a constellation of scientific satellites developed through a collaboration between the China National Space Administration (CNSA) and the Italian Space Agency (ASI). The mission investigates the near-Earth electromagnetic environment and its potential correlation with seismic and volcanic activity.
 
-
-
-Operating in a sun-synchronous Low Earth Orbit (LEO) at an altitude of approximately 500 km, the satellites continuously monitor the ionosphere, magnetosphere, and the Van Allen radiation belts. 
-
-The satellites are equipped with a suite of highly sensitive instruments, including search-coil magnetometers, electric field detectors, plasma analyzers, and the **High-Energy Particle Detector (HEPD)**. By mapping perturbations in plasma density, electromagnetic waves, and particle fluxes, the CSES mission aims to identify pre-seismic anomalies, advancing our understanding of lithosphere-atmosphere-ionosphere coupling mechanisms.
+Operating in a sun-synchronous Low Earth Orbit (LEO) at an altitude of approximately 500 km, the satellites are equipped with a suite of highly sensitive instruments, including search-coil magnetometers, electric field detectors, plasma analyzers, and the **High-Energy Particle Detector (HEPD)**. By mapping perturbations in plasma density, electromagnetic waves, and particle fluxes, the CSES mission aims to identify pre-seismic anomalies.
 
 
 
@@ -38,9 +34,6 @@ The satellites are equipped with a suite of highly sensitive instruments, includ
 
 * **Kinematic Propagation:** Uses `satellite.js` to compute geodetic coordinates (latitude, longitude, altitude) and velocity at a 1 Hz refresh rate.
 
-* **Geomagnetic Approximation:** Implements a dipole magnetic field model to estimate the local magnetic intensity ($nT$) based on the current coordinates and altitude of the spacecraft.
-
-
 
 ### Environment & Network Mapping
 
@@ -48,13 +41,13 @@ The satellites are equipped with a suite of highly sensitive instruments, includ
 
 * **Dynamic Footprint:** Visualizes an approximate 2,400 km line-of-sight radius, representing the constraints for telemetry downlink.
 
-* **Ground Station Logic:** Continuously calculates the haversine distance between the satellites and global ground stations (e.g., Fucino, Kiruna, Beijing).
+* **Ground Stations:** Continuously calculates the haversine distance between the satellites and global ground stations.
 
 
 
 ## Local Setup & Execution
 
-Due to modern browser security restrictions, running the `index.html` file directly from your filesystem will result in CORS errors, preventing the application from fetching live TLE data. A local HTTP server is required.
+The web application is hosted on GitHub Pages: https://daddesa.github.io/cses-tracker/. If you want to run it locally, a bit of care is needed as, due to modern browser security restrictions, running the `index.html` file directly from your filesystem will result in CORS errors, preventing the application from fetching live TLE data. A local HTTP server is required.
 
 
 
