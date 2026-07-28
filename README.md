@@ -41,9 +41,33 @@ Operating in a sun-synchronous Low Earth Orbit (LEO) at an altitude of approxima
 
 * **Dynamic Footprint:** Visualizes an approximate 2,400 km line-of-sight radius, representing the constraints for telemetry downlink.
 
-* **Ground Stations:** Continuously calculates the haversine distance between the satellites and global ground stations.
+* **Ground Stations:** Continuously calculates the haversine distance between the satellites and global ground stations, as to infer when downlink can be expected.
 
+## Approximations
 
+To keep computations lightweight this project implements several mathematical and physical simplifications. 
+
+### 1. Magnetic Field Estimation
+* **Ideal Dipole Model:** Calculates intensity using a perfect dipole formula:
+  <div align="center">
+
+  $$B(r, \lambda) = \frac{B_0}{r^3} \sqrt{1 + 3\sin^2(\lambda)}$$
+
+  </div>
+* It completely ignores higher order harmonics and local anomalies.
+* **Geographic vs. Geomagnetic Axis:** Feeds geographic latitude directly into the equation, ignoring the tilt and offset of Earth's true geomagnetic axis.
+* **Static Field:** Assumes a fixed surface baseline ($B_0 = 31,200 \text{ nT}$), ignoring dynamic Space Weather events and long-term variations.
+
+### 2. Distance and Geometry
+* **Spherical Earth Assumption:** Uses a constant Earth radius of 6,371 km for both magnetic calculations and the Haversine distance formula.
+* **2D Ground Track Distance:** The distance between CSES-01 and CSES-02 is calculated as the great-circle distance along Earth's surface.
+
+### 3. Visibility and Footprints
+* **Fixed Radius Footprint:** Footprint is hardcoded to be a 2,400 km radius circle on the ground. In reality true visibility dynamically depends on the satellite's instantaneous altitude and the specific minimum elevation angle required by the receiving antenna.
+* **No Topography:** No terrain obstacles such as mountains are taken into account, while in reality they may actively block the signal between the satellite and the ground station.
+
+### 4. Orbital Mechanics & Telemetry
+* **Inertial Velocity:** The displayed velocity is the absolute magnitude in the Earth Centered Inertial (ECI) frame. 
 
 ## Local Setup & Execution
 
