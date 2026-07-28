@@ -54,9 +54,9 @@ To keep computations lightweight this project implements several mathematical an
   $$B(r, \lambda) = \frac{B_0}{r^3} \sqrt{1 + 3\sin^2(\lambda)}$$
 
   </div>
-* It completely ignores higher order harmonics and local anomalies.
-* **Geographic vs. Geomagnetic Axis:** Feeds geographic latitude directly into the equation, ignoring the tilt and offset of Earth's true geomagnetic axis.
-* **Static Field:** Assumes a fixed surface baseline ($B_0 = 31,200 \text{ nT}$), ignoring dynamic Space Weather events and long-term variations.
+It completely ignores higher order harmonics and local anomalies.
+* **Geographic vs. Geomagnetic Axis:** Uses geographic latitude, ignoring the tilt and offset of Earth's true geomagnetic axis.
+* **Static Field:** Uses a fixed value ($B_0 = 31,200 \text{ nT}$), ignoring latitude, dynamic Space Weather events, long-term variations or SAA region.
 
 ### 2. Distance and Geometry
 * **Spherical Earth Assumption:** Uses a constant Earth radius of 6,371 km for both magnetic calculations and the Haversine distance formula.
