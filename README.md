@@ -30,7 +30,7 @@ Operating in a sun-synchronous Low Earth Orbit (LEO) at an altitude of approxima
 
 ### Orbital & Telemetry Tracking
 
-* **Real-Time TLE Processing:** Fetches the latest orbital elements directly from CelesTrak without intermediate proxy servers.
+* **Real-Time TLE Processing:** Dinamically fetches the latest orbital elements directly from CelesTrak
 
 * **Kinematic Propagation:** Uses `satellite.js` to compute geodetic coordinates (latitude, longitude, altitude) and velocity at a 1 Hz refresh rate.
 
@@ -39,9 +39,9 @@ Operating in a sun-synchronous Low Earth Orbit (LEO) at an altitude of approxima
 
 * **SAA Visualization:** Renders the boundary geometry of the South Atlantic Anomaly (SAA), a crucial region where the Earth's inner Van Allen belt dips close to the surface, affecting onboard instruments.
 
-* **Dynamic Footprint:** Visualizes an approximate 2,400 km line-of-sight radius, representing the constraints for telemetry downlink.
+* **Footprint:** Visualizes a 2,400 km radius circle, representing the constraints for telemetry downlink.
 
-* **Ground Stations:** Continuously calculates the haversine distance between the satellites and global ground stations, as to infer when downlink can be expected.
+* **Ground Stations:** Continuously calculates the haversine distance between the satellites and global ground stations, as to infer when downlink can be expected to happen.
 
 ## Approximations
 
@@ -54,13 +54,13 @@ To keep computations lightweight this project implements several mathematical an
   $$B(r, \lambda) = \frac{B_0}{r^3} \sqrt{1 + 3\sin^2(\lambda)}$$
 
   </div>
-It completely ignores higher order harmonics and local anomalies.
+ignoring higher order harmonics and local anomalies.
 * **Geographic vs. Geomagnetic Axis:** Uses geographic latitude, ignoring the tilt and offset of Earth's true geomagnetic axis.
-* **Static Field:** Uses a fixed value ($B_0 = 31,200 \text{ nT}$), ignoring latitude, dynamic Space Weather events, long-term variations or SAA region.
+* **Static Field:** Uses a fixed value ($B_0 = 31,200 \text{ nT}$), ignoring latitude impact, dynamic Space Weather events, long-term variations or SAA region.
 
 ### 2. Distance and Geometry
 * **Spherical Earth Assumption:** Uses a constant Earth radius of 6,371 km for both magnetic calculations and the Haversine distance formula.
-* **2D Ground Track Distance:** The distance between CSES-01 and CSES-02 is calculated as the great-circle distance along Earth's surface.
+* **2D Ground Track Distance:** The distance between CSES-01 and CSES-02 is calculated as the great-circle distance on Earth's surface.
 
 ### 3. Visibility and Footprints
 * **Fixed Radius Footprint:** Footprint is hardcoded to be a 2,400 km radius circle on the ground. In reality true visibility dynamically depends on the satellite's instantaneous altitude and the specific minimum elevation angle required by the receiving antenna.
@@ -71,7 +71,7 @@ It completely ignores higher order harmonics and local anomalies.
 
 ## Local Setup & Execution
 
-The web application is hosted on GitHub Pages: https://daddesa.github.io/cses-tracker/. If you want to run it locally, a bit of care is needed as, due to modern browser security restrictions, running the `index.html` file directly from your filesystem will result in CORS errors, preventing the application from fetching live TLE data. A local HTTP server is required.
+The web application is hosted on GitHub Pages: https://daddesa.github.io/cses-tracker/. If you want to run it locally a bit of care is needed as, due to modern browser security restrictions, running the `index.html` file directly from your filesystem will result in CORS errors, preventing the application from fetching live TLE data. A local HTTP server is required.
 
 
 
@@ -109,5 +109,6 @@ python -m http.server 8000
 
 
 
-**Data Accuracy & Liability:** The orbital data is sourced dynamically from public CelesTrak TLEs. The developer assumes no responsibility or liability for any errors, omissions, or inaccuracies in the content, calculations, or rendering of this application. The information and tools contained herein are provided on an "as is" basis with no guarantees of completeness, accuracy, usefulness, or timeliness. This tool must not be used for actual mission control, professional tracking, or scientific publications.
+**Data Accuracy & Liability:** The orbital data is sourced dynamically from public CelesTrak TLEs. The developer assumes no responsibility or liability for any errors, omissions, or inaccuracies in the content, calculations, or rendering of this application. This project relies on very strong approximations and is not intended for production use. **Its sole purpose is to provide a rough visualization of satellite trajectories under simplified assumptions**.
+The information and tools contained herein are provided on an "as is" basis with no guarantees of completeness, accuracy, usefulness, or timeliness. This tool must not be used for actual mission control, professional tracking, or scientific publications.
 
