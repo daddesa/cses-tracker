@@ -12,7 +12,7 @@ This repository contains a real-time, client-side web application designed to tr
 
 
 
-Built as an independent project, the application calculates satellite positions, altitudes, and kinematic data dynamically using SGP4/SDP4 propagation models, relying on live Two-Line Element (TLE) sets fetched directly from public CelesTrak APIs. The goal is to provide a lightweight, accessible tool to visualize the satellite's journey across the globe.
+Built as an independent project, the application calculates satellite positions, altitudes, and kinematic data dynamically using a SGP4 propagation model, using live Two-Line Element (TLE) sets fetched directly from public CelesTrak APIs. 
 
 
 
